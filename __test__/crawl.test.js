@@ -110,3 +110,13 @@ describe('Test getURLsFromHTML Function', () => {
     expect(actual).toEqual(expected);
   });
 });
+
+describe('Test crawlPage Function', () => {
+  it('crawlPage strip protocol', () => {
+    const input = 'https://docs.google.com/path';
+    const actual = crawlPage(input);
+    const expected = 'docs.google.com/path';
+
+    expect(actual).toEqual(expected);
+  });
+});

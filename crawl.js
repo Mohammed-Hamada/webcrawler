@@ -1,5 +1,23 @@
 import { JSDOM } from 'jsdom';
 
+const crawlPage = async (currentURL) => {
+  try {
+    const response = await fetch(currentURL);
+    if (response.status > 399)
+      throw new Error(`Error in fetch with status code: ${response.status}`);
+
+    const contentType = response.headers.get('Content-Type');
+    if (!contentType.includes('text/html')) {
+      throw new Error(`Non HTML response, content type: ${contentType}`);
+    }
+    return response.text();
+  } catch (error) {
+    console.log(
+      `Error: (${error.message}) when crawling url: (${currentURL}).`
+    );
+  }
+};
+
 const getURLsFromHTML = (htmlBody, baseURL) => {
   const urls = [];
   const domObj = new JSDOM(htmlBody);
@@ -37,4 +55,4 @@ const normalizeURL = (urlString) => {
   return hostPath;
 };
 
-export { normalizeURL, getURLsFromHTML };
+export { normalizeURL, getURLsFromHTML, crawlPage };
