@@ -1,4 +1,4 @@
-import { normalizeURL, getURLsFromHTML } from '../crawl';
+import { normalizeURL, getURLsFromHTML } from '../src/crawl';
 import { describe, it, expect } from '@jest/globals';
 
 describe('Test normalizeURL Function', () => {
@@ -106,16 +106,6 @@ describe('Test getURLsFromHTML Function', () => {
     const inputBaseURL = 'https://www.google.ps';
     const actual = getURLsFromHTML(inputHTMLBody, inputBaseURL);
     const expected = [];
-
-    expect(actual).toEqual(expected);
-  });
-});
-
-describe('Test crawlPage Function', () => {
-  it('crawlPage strip protocol', () => {
-    const input = 'https://docs.google.com/path';
-    const actual = crawlPage(input);
-    const expected = 'docs.google.com/path';
 
     expect(actual).toEqual(expected);
   });

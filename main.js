@@ -1,4 +1,5 @@
-import { crawlPage } from './crawl.js';
+import { crawlPage } from './src/crawl.js';
+import { printReport } from './src/report.js';
 
 const main = async () => {
   if (process.argv.length < 3) {
@@ -12,13 +13,11 @@ const main = async () => {
   }
 
   const baseURL = process.argv[2];
-  console.log(`Starting crawl for ${baseURL}`);
-  const pages = await crawlPage(baseURL, baseURL, {});
 
-  for (const page in pages) {
-    console.log('page: ', page);
-  }
-  console.log(pages);
+  console.log(`Starting crawl for ${baseURL}`);
+
+  const pages = await crawlPage(baseURL, baseURL, {});
+  printReport(pages);
 };
 
 main();
